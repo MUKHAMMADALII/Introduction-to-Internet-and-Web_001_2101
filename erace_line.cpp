@@ -1,6 +1,6 @@
 
 
-void erace_line() {                                 //ÇÑ ÁÙÀÌ °û Â÷¸é »èÁ¦ÇÏ±â
+void erace_line() {                                 //í•œ ì¤„ì´ ê³½ ì°¨ë©´ ì‚­ì œí•˜ê¸°
     for (int Y = END_Y + 1; Y < TABLE_Y - 1; Y++) {
         bool isLinear = true;
         for (int X = 1; X < TABLE_X - 1; X++) {
