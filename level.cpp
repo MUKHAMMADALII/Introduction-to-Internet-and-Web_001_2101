@@ -1,11 +1,22 @@
+#define MAIN_X 11 //ê²Œìž„íŒ ê°€ë¡œí¬ê¸° 
+#define MAIN_Y 23 //ê²Œìž„íŒ ì„¸ë¡œí¬ê¸° 
+#define MAIN_X_ADJ 3 //ê²Œìž„íŒ ìœ„ì¹˜ì¡°ì • 
+#define MAIN_Y_ADJ 1 //ê²Œìž„íŒ ìœ„ì¹˜ì¡°ì • 
+
+#define STATUS_X_ADJ MAIN_X_ADJ+MAIN_X+1 //ê²Œìž„ì •ë³´í‘œì‹œ ìœ„ì¹˜ì¡°ì • 
+
+int STATUS_Y_GOAL; //GOAL ì •ë³´í‘œì‹œìœ„ì¹˜Y ì¢Œí‘œ ì €ìž¥ 
+int STATUS_Y_LEVEL; //LEVEL ì •ë³´í‘œì‹œìœ„ì¹˜Y ì¢Œí‘œ ì €ìž¥
+int STATUS_Y_SCORE; //SCORE ì •ë³´í‘œì‹œìœ„ì¹˜Y ì¢Œí‘œ ì €ìž¥
+
 void check_level_up(void) {
     int i, j;
 
-    if (cnt >= 10) { //·¹º§º°·Î 10ÁÙ¾¿ ¾ø¾Ö¾ßÇÔ. 10ÁÙÀÌ»ó ¾ø¾Ø °æ¿ì 
+    if (cnt >= 10) { //ë ˆë²¨ë³„ë¡œ 10ì¤„ì”© ì—†ì• ì•¼í•¨. 10ì¤„ì´ìƒ ì—†ì•¤ ê²½ìš° 
         draw_main();
-        level_up_on = 1; //·¹º§¾÷ flag¸¦ ¶ç¿ò 
-        level += 1; //·¹º§À» 1 ¿Ã¸² 
-        cnt = 0; //Áö¿î ÁÙ¼ö ÃÊ±âÈ­   
+        level_up_on = 1; //ë ˆë²¨ì—… flagë¥¼ ë„ì›€ 
+        level += 1; //ë ˆë²¨ì„ 1 ì˜¬ë¦¼ 
+        cnt = 0; //ì§€ìš´ ì¤„ìˆ˜ ì´ˆê¸°í™”   
 
         for (i = 0; i < 4; i++) {
             gotoxy(MAIN_X_ADJ + (MAIN_X / 2) - 3, MAIN_Y_ADJ + 4);
@@ -15,26 +26,26 @@ void check_level_up(void) {
             Sleep(200);
 
             gotoxy(MAIN_X_ADJ + (MAIN_X / 2) - 3, MAIN_Y_ADJ + 4);
-            printf("¡ÙLEVEL UP!¡Ù");
+            printf("â˜†LEVEL UP!â˜†");
             gotoxy(MAIN_X_ADJ + (MAIN_X / 2) - 2, MAIN_Y_ADJ + 6);
-            printf("¡ÙSPEED UP!¡Ù");
+            printf("â˜†SPEED UP!â˜†");
             Sleep(200);
         }
-        reset_main_cpy(); //ÅØ½ºÆ®¸¦ Áö¿ì±â À§ÇØ main_cpyÀ» ÃÊ±âÈ­.
-//(main_cpy¿Í main_org°¡ ÀüºÎ ´Ù¸£¹Ç·Î ´ÙÀ½¹ø draw()È£Ãâ½Ã °ÔÀÓÆÇ ÀüÃ¼¸¦ »õ·Î ±×¸®°Ô µÊ) 
+        reset_main_cpy(); //í…ìŠ¤íŠ¸ë¥¼ ì§€ìš°ê¸° ìœ„í•´ main_cpyì„ ì´ˆê¸°í™”.
+//(main_cpyì™€ main_orgê°€ ì „ë¶€ ë‹¤ë¥´ë¯€ë¡œ ë‹¤ìŒë²ˆ draw()í˜¸ì¶œì‹œ ê²Œìž„íŒ ì „ì²´ë¥¼ ìƒˆë¡œ ê·¸ë¦¬ê²Œ ë¨) 
 
-        for (i = MAIN_Y - 2; i > MAIN_Y - 2 - (level - 1); i--) { //·¹º§¾÷º¸»óÀ¸·Î °¢ ·¹º§-1ÀÇ ¼ö¸¸Å­ ¾Æ·§ÂÊ ÁÙÀ» Áö¿öÁÜ 
+        for (i = MAIN_Y - 2; i > MAIN_Y - 2 - (level - 1); i--) { //ë ˆë²¨ì—…ë³´ìƒìœ¼ë¡œ ê° ë ˆë²¨-1ì˜ ìˆ˜ë§Œí¼ ì•„ëž«ìª½ ì¤„ì„ ì§€ì›Œì¤Œ 
             for (j = 1; j < MAIN_X - 1; j++) {
-                main_org[i][j] = INACTIVE_BLOCK; // ÁÙÀ» ºí·ÏÀ¸·Î ¸ðµÎ Ã¤¿ì°í 
-                gotoxy(MAIN_X_ADJ + j, MAIN_Y_ADJ + i); // º°À» Âï¾îÁÜ.. ÀÌ»µº¸ÀÌ°Ô 
-                printf("¡Ú");
+                main_org[i][j] = INACTIVE_BLOCK; // ì¤„ì„ ë¸”ë¡ìœ¼ë¡œ ëª¨ë‘ ì±„ìš°ê³  
+                gotoxy(MAIN_X_ADJ + j, MAIN_Y_ADJ + i); // ë³„ì„ ì°ì–´ì¤Œ.. ì´ë»ë³´ì´ê²Œ 
+                printf("â˜…");
                 Sleep(20);
             }
         }
-        Sleep(100); //º°ÂïÀº°Å º¸¿©ÁÖ±â À§ÇØ delay 
-        check_line(); //ºí·ÏÀ¸·Î ¸ðµÎ Ã¤¿î°Í Áö¿ì±â
-//.check_line()ÇÔ¼ö ³»ºÎ¿¡¼­ level up flag°¡ ÄÑÁ®ÀÖ´Â °æ¿ì Á¡¼ö´Â ¾øÀ½.         
-        switch (level) { //·¹º§º°·Î ¼Óµµ¸¦ Á¶ÀýÇØÁÜ. 
+        Sleep(100); //ë³„ì°ì€ê±° ë³´ì—¬ì£¼ê¸° ìœ„í•´ delay 
+        check_line(); //ë¸”ë¡ìœ¼ë¡œ ëª¨ë‘ ì±„ìš´ê²ƒ ì§€ìš°ê¸°
+//.check_line()í•¨ìˆ˜ ë‚´ë¶€ì—ì„œ level up flagê°€ ì¼œì ¸ìžˆëŠ” ê²½ìš° ì ìˆ˜ëŠ” ì—†ìŒ.         
+        switch (level) { //ë ˆë²¨ë³„ë¡œ ì†ë„ë¥¼ ì¡°ì ˆí•´ì¤Œ. 
         case 2:
             speed = 50;
             break;
@@ -63,10 +74,10 @@ void check_level_up(void) {
             speed = 0;
             break;
         }
-        level_up_on = 0; //·¹º§¾÷ flag²¨ÁÜ
+        level_up_on = 0; //ë ˆë²¨ì—… flagêº¼ì¤Œ
 
-        gotoxy(STATUS_X_ADJ, STATUS_Y_LEVEL); printf(" LEVEL : %5d", level); //·¹º§Ç¥½Ã 
-        gotoxy(STATUS_X_ADJ, STATUS_Y_GOAL); printf(" GOAL  : %5d", 10 - cnt); // ·¹º§¸ñÇ¥ Ç¥½Ã 
+        gotoxy(STATUS_X_ADJ, STATUS_Y_LEVEL); printf(" LEVEL : %5d", level); //ë ˆë²¨í‘œì‹œ 
+        gotoxy(STATUS_X_ADJ, STATUS_Y_GOAL); printf(" GOAL  : %5d", 10 - cnt); // ë ˆë²¨ëª©í‘œ í‘œì‹œ 
 
     }
 }
